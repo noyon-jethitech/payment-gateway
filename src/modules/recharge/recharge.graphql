@@ -1,0 +1,55 @@
+directive @isAuthenticated on FIELD_DEFINITION
+directive @hasRole(roles: [String]) on FIELD_DEFINITION
+
+directive @rateLimit(
+  max: Int
+  window: String
+  message: String
+  identityArgs: [String]
+  arrayLengthField: String
+) on FIELD_DEFINITION
+
+type Query {
+  getRechargeDetails(id: ID!): RECHARGE
+}
+
+type Mutation {
+  createRechargeDetails(input: CreateRechargeDetailsInput!): Response
+  updateRechargeDetails(input: UpdateRechargeDetailsInput!): Response
+}
+
+input CreateRechargeDetailsInput {
+  feature: String!
+  minutes: Int!
+  month: Int!
+  minutes_consumed: Int!
+  recharge_date: String!
+}
+
+input UpdateRechargeDetailsInput {
+  feature: String!
+  minutes: Int!
+  month: Int!
+  minutes_consumed: Int!
+  recharge_date: String!
+}
+
+type Response {
+  message: String!
+}
+
+type RECHARGE {
+  id: ID
+  feature: String!
+  minutes: Int!
+  month: Int!
+  minutes_consumed: Int!
+  recharge_date: String!
+}
+
+type RECHARGE_TRACK {
+  userId: ID
+  rechargeId: ID
+  rechargeDateTime: String
+  comsumptionDateTime: String
+}

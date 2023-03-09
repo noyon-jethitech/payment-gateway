@@ -1,0 +1,47 @@
+directive @isAuthenticated on FIELD_DEFINITION
+directive @hasRole(roles: [String]) on FIELD_DEFINITION
+directive @rateLimit(
+  max: Int
+  window: String
+  message: String
+  identityArgs: [String]
+  arrayLengthField: String
+) on FIELD_DEFINITION
+
+type Query {
+  getExample: Example @isAuthenticated @rateLimit(window: "1m", max: 20)
+}
+
+type Mutation {
+  createExample(input: CreateExampleInput!): Response
+    @rateLimit(window: "1m", max: 10)
+  # updateExample(input: sendOtp!): Response @rateLimit(window: "1m", max: 10)
+  # deleteExaple(input: sendOtp!): Response @rateLimit(window: "1m", max: 10)
+}
+
+type Response {
+  message: String!
+}
+
+type Example {
+  id: ID
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  contactNumber: String
+  lastpasswordupdate: String
+  otp: String
+  optexpiration: String
+  otptried: String
+  lastLoggedIn: String
+  createdat: String
+  updateat: String
+}
+
+input CreateExampleInput {
+  firstName: String
+  lastName: String
+  jwtToken: String
+  contactNumber: String
+}
