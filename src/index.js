@@ -29,6 +29,7 @@ const middlewares = require('./utils/middlewares');
 const SentryLogsPlugin = require('./utils/sentry-logs');
 const { CustomAuthenticationError, CustomApolloError, CustomForbiddenError } = require('./utils/error-handler');
 const { getMessage } = require('./utils/messages');
+const { payment } = require('./controllers/payment/payment');
 
 const app = express();
 
@@ -158,6 +159,8 @@ app.get('/version', (req, res) => {
     version: packageJson.version,
   });
 });
+
+app.post('/payment', payment);
 
 sequelize.sync().then(async () => {
   httpServer.listen(CONFIG.port, () => {

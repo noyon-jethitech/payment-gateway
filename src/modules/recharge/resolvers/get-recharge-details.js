@@ -1,9 +1,7 @@
 const { CustomApolloError } = require('../../../utils/error-handler');
 const { getMessage } = require('../../../utils/messages');
 const rechargeLogger = require('../recharge-logger');
-
 require('dotenv');
-
 
 const getRechargeDetails = async (_, args, ctx) => {
   try {
@@ -11,9 +9,8 @@ const getRechargeDetails = async (_, args, ctx) => {
     const {
       recharge: RechargeModel,
     } = models;
-
+    // console.log(req)
     const { recharge: rechargeObj } = req;
-
     const rechargeInstance = await RechargeModel.findByPk(rechargeObj.id);
 
     if (!rechargeInstance) {

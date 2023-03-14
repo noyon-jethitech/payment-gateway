@@ -18,6 +18,10 @@ type Mutation {
   updateRechargeDetails(input: UpdateRechargeDetailsInput!): Response
 }
 
+type Subscription {
+  timeUpdate: RECHARGE
+}
+
 input CreateRechargeDetailsInput {
   feature: String!
   minutes: Int!
