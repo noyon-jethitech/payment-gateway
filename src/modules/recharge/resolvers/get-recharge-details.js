@@ -9,9 +9,11 @@ const getRechargeDetails = async (_, args, ctx) => {
     const {
       recharge: RechargeModel,
     } = models;
-    // console.log(req)
+    const { id } = args;
+
+    // console.log(req);
     const { recharge: rechargeObj } = req;
-    const rechargeInstance = await RechargeModel.findByPk(rechargeObj.id);
+    const rechargeInstance = await RechargeModel.findByPk(id);
 
     if (!rechargeInstance) {
       throw new CustomApolloError(getMessage('RECHARGE_INFO_NOT_FOUND'));

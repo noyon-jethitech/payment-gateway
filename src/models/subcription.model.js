@@ -1,24 +1,28 @@
 /* eslint-disable no-param-reassign */
-const recharge = (sequelize, DataTypes) => {
-  const Recharge = sequelize.define('recharge', {
-    feature: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    minutes: {
+const rechargeTrack = (sequelize, DataTypes) => {
+  // Track Table (
+  //   user_id
+  //   recharge_id
+  //   recharge_date_time
+  //   consumption_date_time
+  // )
+
+
+  const RechargeTrack = sequelize.define('recharge_track', {
+    user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
-    month: {
+    recharge_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    minutes_consumed: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     recharge_date_time: {
       type: DataTypes.DATE,
+      allowNull: false,
+    },
+    consumption_date_time: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   }, {
@@ -27,13 +31,13 @@ const recharge = (sequelize, DataTypes) => {
         options.raw = true;
       },
     },
-    tableName: 'recharge',
+    tableName: 'subscription',
     timestamps: true,
     underscored: true,
     paranoid: true,
   });
 
-  Recharge.associate = models => {
+  RechargeTrack.associate = models => {
     console.log(models); // remove this line after uncommenting below lines
     // User.hasMany(models.workspace, {
     //   as: 'workspace_creator',
@@ -41,11 +45,9 @@ const recharge = (sequelize, DataTypes) => {
     //   sourceKey: 'id',
     //   onDelete: 'RESTRICT',
     // });
-    //};
-  }
+  };
 
-  return Recharge;
-}
+  return RechargeTrack;
+};
 
-
-module.exports = recharge;
+module.exports = rechargeTrack;

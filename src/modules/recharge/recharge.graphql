@@ -14,12 +14,13 @@ type Query {
 }
 
 type Mutation {
-  createRechargeDetails(input: CreateRechargeDetailsInput!): Response
-  updateRechargeDetails(input: UpdateRechargeDetailsInput!): Response
+  createRechargeDetails(input: CreateRechargeDetailsInput!): RECHARGE
+  updateRechargeDetails(input: UpdateRechargeDetailsInput!): RECHARGE
 }
 
 type Subscription {
-  timeUpdate: RECHARGE
+  rechargeCreated: RECHARGE
+  rechargeUpdated: RECHARGE
 }
 
 input CreateRechargeDetailsInput {
@@ -27,15 +28,16 @@ input CreateRechargeDetailsInput {
   minutes: Int!
   month: Int!
   minutes_consumed: Int!
-  recharge_date: String!
+  recharge_date_time: String!
 }
 
 input UpdateRechargeDetailsInput {
-  feature: String!
-  minutes: Int!
-  month: Int!
-  minutes_consumed: Int!
-  recharge_date: String!
+  id: ID!
+  feature: String
+  minutes: Int
+  month: Int
+  minutes_consumed: Int
+  recharge_date: String
 }
 
 type Response {
@@ -44,11 +46,11 @@ type Response {
 
 type RECHARGE {
   id: ID
-  feature: String!
-  minutes: Int!
-  month: Int!
-  minutes_consumed: Int!
-  recharge_date: String!
+  feature: String
+  minutes: Int
+  month: Int
+  minutes_consumed: Int
+  recharge_date: String
 }
 
 type RECHARGE_TRACK {

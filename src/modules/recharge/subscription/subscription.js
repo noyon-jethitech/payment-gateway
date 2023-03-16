@@ -12,7 +12,7 @@ const RESET_EXPIRY_TTL = 5;
 
 const timeUpdated = (_, { input }, { pubsub }) => {
     async subscribe(parent, arguments, { pubsub }){
-        return pubsub.asyncIterator("updated recharge model")
+        return pubsub.asyncIterator("updated_recharge_model")
     }
 
 

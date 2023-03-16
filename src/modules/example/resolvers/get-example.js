@@ -10,9 +10,7 @@ const getExample = async (_, args, ctx) => {
       example: ExampleModel,
     } = models;
     const { example: exampleObj } = req;
-
     const exampleInstance = await ExampleModel.findByPk(exampleObj.id);
-
     if (!exampleInstance) {
       throw new CustomApolloError(getMessage('USER_NOT_FOUND'));
     }
